@@ -1,2 +1,2 @@
-# Birthday-Buddy
+# Birthday, Anniversary, Marriage-Buddy
 Birthday dates worth remembering!
