@@ -2,975 +2,1350 @@
 <html lang="en">
 
 <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-         <title>Dayminder</title>
-         <style>
-                  :root {
-                           --bg1: #fff0f5;
-                           --bg2: #fff8e1;
-                           --panel: #ffffff;
-                           --ink: #2b1b3d;
-                           --muted: #6f6382;
-                           --accent: #d81b60;
-                           --accent-ink: #ffffff;
-                           --bot: #fdeef5;
-                           --line: #f0d9e5;
-                           --teal: #0b7f74;
-                           --hd1: #e0245e;
-                           --hd2: #6b3fd6;
-                           --chip: #fff3c4;
-                           --chip-ink: #5a4300;
-                  }
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+   <title>Dayminder</title>
+   <style>
+      :root {
+         --bg1: #fff0f5;
+         --bg2: #fff8e1;
+         --panel: #ffffff;
+         --ink: #2b1b3d;
+         --muted: #6f6382;
+         --accent: #d81b60;
+         --accent-ink: #ffffff;
+         --bot: #fdeef5;
+         --line: #f0d9e5;
+         --teal: #0b7f74;
+         --hd1: #e0245e;
+         --hd2: #6b3fd6;
+         --chip: #fff3c4;
+         --chip-ink: #5a4300;
+      }
 
-                  @media (prefers-color-scheme: dark) {
-                           :root {
-                                    --bg1: #190f24;
-                                    --bg2: #10091a;
-                                    --panel: #241733;
-                                    --ink: #f6eefc;
-                                    --muted: #b5a6c9;
-                                    --accent: #ff7aa8;
-                                    --accent-ink: #2a0f1c;
-                                    --bot: #34234a;
-                                    --line: #3d2a55;
-                                    --teal: #35c9b8;
-                                    --hd1: #b3154a;
-                                    --hd2: #4a2aa8;
-                                    --chip: #4a3a10;
-                                    --chip-ink: #ffe28a;
-                           }
-                  }
+      @media (prefers-color-scheme: dark) {
+         :root {
+            --bg1: #190f24;
+            --bg2: #10091a;
+            --panel: #241733;
+            --ink: #f6eefc;
+            --muted: #b5a6c9;
+            --accent: #ff7aa8;
+            --accent-ink: #2a0f1c;
+            --bot: #34234a;
+            --line: #3d2a55;
+            --teal: #35c9b8;
+            --hd1: #b3154a;
+            --hd2: #4a2aa8;
+            --chip: #4a3a10;
+            --chip-ink: #ffe28a;
+         }
+      }
 
-                  * {
-                           box-sizing: border-box
-                  }
+      * {
+         box-sizing: border-box
+      }
 
-                  html,
-                  body {
-                           height: 100%;
-                           margin: 0
-                  }
+      html,
+      body {
+         height: 100%;
+         margin: 0
+      }
 
-                  body {
-                           background: linear-gradient(160deg, var(--bg1), var(--bg2));
-                           color: var(--ink);
-                           font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                  }
+      body {
+         background: linear-gradient(160deg, var(--bg1), var(--bg2));
+         color: var(--ink);
+         font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
 
-                  .app {
-                           height: 100%;
-                           height: 100dvh;
-                           max-width: 1040px;
-                           margin: 0 auto;
-                           position: relative;
-                           overflow: hidden;
-                           display: flex;
-                           flex-direction: column;
-                           background: var(--panel);
-                           padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-                  }
+      .app {
+         height: 100%;
+         height: 100dvh;
+         max-width: 1040px;
+         margin: 0 auto;
+         position: relative;
+         overflow: hidden;
+         display: flex;
+         flex-direction: column;
+         background: var(--panel);
+         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
 
-                  @media (min-width:1080px) {
-                           .app {
-                                    height: calc(100dvh - 32px);
-                                    margin: 16px auto;
-                                    border-radius: 24px;
-                                    box-shadow: 0 20px 60px rgba(107, 63, 214, .25)
-                           }
-                  }
+      @media (min-width:1080px) {
+         .app {
+            height: calc(100dvh - 32px);
+            margin: 16px auto;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(107, 63, 214, .25)
+         }
+      }
 
-                  header {
-                           display: flex;
-                           align-items: center;
-                           justify-content: space-between;
-                           gap: 10px;
-                           padding: 12px 16px;
-                           color: #fff;
-                           background: linear-gradient(100deg, var(--hd1), var(--hd2));
-                  }
+      header {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         gap: 10px;
+         padding: 12px 16px;
+         color: #fff;
+         background: linear-gradient(100deg, var(--hd1), var(--hd2));
+      }
 
-                  .brand {
-                           display: flex;
-                           align-items: center;
-                           gap: 10px;
-                           min-width: 0
-                  }
+      .brand {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         min-width: 0
+      }
 
-                  .logo {
-                           font-size: 1.8rem;
-                           line-height: 1
-                  }
+      .logo {
+         font-size: 1.8rem;
+         line-height: 1
+      }
 
-                  header h1 {
-                           margin: 0;
-                           font-size: 1.2rem;
-                           font-weight: 800;
-                           letter-spacing: .2px
-                  }
+      header h1 {
+         margin: 0;
+         font-size: 1.2rem;
+         font-weight: 800;
+         letter-spacing: .2px
+      }
 
-                  header p {
-                           margin: 0;
-                           font-size: .8rem;
-                           opacity: .92
-                  }
+      header p {
+         margin: 0;
+         font-size: .8rem;
+         opacity: .92
+      }
 
-                  .actions {
-                           display: flex;
-                           gap: 8px
-                  }
+      .actions {
+         display: flex;
+         gap: 8px
+      }
 
-                  .hbtn {
-                           min-height: 44px;
-                           padding: 0 14px;
-                           border-radius: 22px;
-                           cursor: pointer;
-                           font: inherit;
-                           font-weight: 600;
-                           color: #fff;
-                           background: rgba(255, 255, 255, .2);
-                           border: 1px solid rgba(255, 255, 255, .55);
-                  }
+      .hbtn {
+         min-height: 44px;
+         padding: 0 14px;
+         border-radius: 22px;
+         cursor: pointer;
+         font: inherit;
+         font-weight: 600;
+         color: #fff;
+         background: rgba(255, 255, 255, .2);
+         border: 1px solid rgba(255, 255, 255, .55);
+      }
 
-                  .hbtn:disabled {
-                           opacity: .6;
-                           cursor: not-allowed
-                  }
+      .hbtn:disabled {
+         opacity: .6;
+         cursor: not-allowed
+      }
 
-                  .stripe {
-                           height: 6px;
-                           background: repeating-linear-gradient(90deg, #ff3d7f 0 24px, #ffc533 24px 48px, #19b5a5 48px 72px, #7c5cff 72px 96px)
-                  }
+      .stripe {
+         height: 6px;
+         background: repeating-linear-gradient(90deg, #ff3d7f 0 24px, #ffc533 24px 48px, #19b5a5 48px 72px, #7c5cff 72px 96px)
+      }
 
-                  .body {
-                           flex: 1;
-                           min-height: 0;
-                           display: flex
-                  }
+      .body {
+         flex: 1;
+         min-height: 0;
+         display: flex
+      }
 
-                  .chat {
-                           flex: 1;
-                           min-width: 0;
-                           display: flex;
-                           flex-direction: column;
-                           position: relative
-                  }
+      .chat {
+         flex: 1;
+         min-width: 0;
+         display: flex;
+         flex-direction: column;
+         position: relative
+      }
 
-                  #log {
-                           flex: 1;
-                           overflow-y: auto;
-                           padding: 16px;
-                           display: flex;
-                           flex-direction: column;
-                           gap: 10px;
-                           -webkit-overflow-scrolling: touch
-                  }
+      #log {
+         flex: 1;
+         overflow-y: auto;
+         padding: 16px;
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+         -webkit-overflow-scrolling: touch
+      }
 
-                  .msg {
-                           max-width: 88%;
-                           padding: 10px 14px;
-                           border-radius: 18px;
-                           white-space: pre-wrap;
-                           overflow-wrap: anywhere
-                  }
+      .msg {
+         max-width: 88%;
+         padding: 10px 14px;
+         border-radius: 18px;
+         white-space: pre-wrap;
+         overflow-wrap: anywhere
+      }
 
-                  .msg.bot {
-                           align-self: flex-start;
-                           background: var(--bot);
-                           border-bottom-left-radius: 4px
-                  }
+      .msg.bot {
+         align-self: flex-start;
+         background: var(--bot);
+         border-bottom-left-radius: 4px
+      }
 
-                  .msg.user {
-                           align-self: flex-end;
-                           background: var(--accent);
-                           color: var(--accent-ink);
-                           border-bottom-right-radius: 4px
-                  }
+      .msg.user {
+         align-self: flex-end;
+         background: var(--accent);
+         color: var(--accent-ink);
+         border-bottom-right-radius: 4px
+      }
 
-                  .chips {
-                           display: flex;
-                           flex-wrap: wrap;
-                           gap: 8px;
-                           margin-top: 10px
-                  }
+      .chips {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 8px;
+         margin-top: 10px
+      }
 
-                  .chip,
-                  .cmd {
-                           font: inherit;
-                           font-weight: 600;
-                           cursor: pointer;
-                           border-radius: 999px;
-                           min-height: 40px;
-                           padding: 0 14px;
-                           background: var(--chip);
-                           color: var(--chip-ink);
-                           border: 1px solid transparent;
-                  }
+      .chip,
+      .cmd {
+         font: inherit;
+         font-weight: 600;
+         cursor: pointer;
+         border-radius: 999px;
+         min-height: 40px;
+         padding: 0 14px;
+         background: var(--chip);
+         color: var(--chip-ink);
+         border: 1px solid transparent;
+      }
 
-                  .chip:hover,
-                  .cmd:hover {
-                           border-color: var(--accent)
-                  }
+      .chip:hover,
+      .cmd:hover {
+         border-color: var(--accent)
+      }
 
-                  #status {
-                           position: absolute;
-                           top: 10px;
-                           left: 50%;
-                           transform: translateX(-50%);
-                           z-index: 5;
-                           min-height: 40px;
-                           padding: 0 16px;
-                           border-radius: 999px;
-                           border: 0;
-                           cursor: pointer;
-                           font: inherit;
-                           font-weight: 600;
-                           background: var(--teal);
-                           color: #fff;
-                           box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
-                  }
+      #status {
+         position: absolute;
+         top: 10px;
+         left: 50%;
+         transform: translateX(-50%);
+         z-index: 5;
+         min-height: 40px;
+         padding: 0 16px;
+         border-radius: 999px;
+         border: 0;
+         cursor: pointer;
+         font: inherit;
+         font-weight: 600;
+         background: var(--teal);
+         color: #fff;
+         box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
+      }
 
-                  #status[hidden] {
-                           display: none
-                  }
+      #status[hidden] {
+         display: none
+      }
 
-                  form {
-                           display: flex;
-                           gap: 8px;
-                           padding: 12px 16px;
-                           border-top: 1px solid var(--line)
-                  }
+      form {
+         display: flex;
+         gap: 8px;
+         padding: 12px 16px;
+         border-top: 1px solid var(--line)
+      }
 
-                  input[type=text] {
-                           flex: 1;
-                           min-width: 0;
-                           min-height: 46px;
-                           padding: 0 16px;
-                           border-radius: 23px;
-                           border: 1px solid var(--line);
-                           background: var(--bg1);
-                           color: var(--ink);
-                           font-size: 16px;
-                  }
+      input[type=text] {
+         flex: 1;
+         min-width: 0;
+         min-height: 46px;
+         padding: 0 16px;
+         border-radius: 23px;
+         border: 1px solid var(--line);
+         background: var(--bg1);
+         color: var(--ink);
+         font-size: 16px;
+      }
 
-                  .btn {
-                           min-height: 46px;
-                           min-width: 46px;
-                           border: 0;
-                           border-radius: 23px;
-                           cursor: pointer;
-                           font: inherit;
-                           font-weight: 700;
-                           padding: 0 18px;
-                           background: var(--accent);
-                           color: var(--accent-ink)
-                  }
+      .btn {
+         min-height: 46px;
+         min-width: 46px;
+         border: 0;
+         border-radius: 23px;
+         cursor: pointer;
+         font: inherit;
+         font-weight: 700;
+         padding: 0 18px;
+         background: var(--accent);
+         color: var(--accent-ink)
+      }
 
-                  #mic {
-                           background: var(--teal);
-                           color: #fff;
-                           padding: 0
-                  }
+      #mic {
+         background: var(--teal);
+         color: #fff;
+         padding: 0
+      }
 
-                  #mic svg {
-                           width: 22px;
-                           height: 22px;
-                           fill: currentColor;
-                           display: block;
-                           margin: auto
-                  }
+      #mic svg {
+         width: 22px;
+         height: 22px;
+         fill: currentColor;
+         display: block;
+         margin: auto
+      }
 
-                  #mic.on {
-                           background: #c62828;
-                           animation: pulse 1.2s infinite
-                  }
+      #mic.on {
+         background: #c62828;
+         animation: pulse 1.2s infinite
+      }
 
-                  @keyframes pulse {
-                           0% {
-                                    box-shadow: 0 0 0 0 rgba(198, 40, 40, .5)
-                           }
+      @keyframes pulse {
+         0% {
+            box-shadow: 0 0 0 0 rgba(198, 40, 40, .5)
+         }
 
-                           100% {
-                                    box-shadow: 0 0 0 14px rgba(198, 40, 40, 0)
-                           }
-                  }
+         100% {
+            box-shadow: 0 0 0 14px rgba(198, 40, 40, 0)
+         }
+      }
 
-                  button:focus-visible,
-                  input:focus-visible {
-                           outline: 3px solid var(--teal);
-                           outline-offset: 2px
-                  }
+      button:focus-visible,
+      input:focus-visible {
+         outline: 3px solid var(--teal);
+         outline-offset: 2px
+      }
 
-                  /* ---------- help side panel ---------- */
-                  aside {
-                           width: 310px;
-                           flex: none;
-                           overflow-y: auto;
-                           padding: 16px;
-                           background: var(--panel);
-                           border-left: 1px solid var(--line);
-                  }
+      /* ---------- help side panel ---------- */
+      aside {
+         width: 310px;
+         flex: none;
+         overflow-y: auto;
+         padding: 16px;
+         background: var(--panel);
+         border-left: 1px solid var(--line);
+      }
 
-                  .ph {
-                           display: flex;
-                           align-items: center;
-                           justify-content: space-between
-                  }
+      .ph {
+         display: flex;
+         align-items: center;
+         justify-content: space-between
+      }
 
-                  aside h2 {
-                           margin: 0;
-                           font-size: 1.1rem
-                  }
+      aside h2 {
+         margin: 0;
+         font-size: 1.1rem
+      }
 
-                  .x {
-                           display: none;
-                           width: 44px;
-                           height: 44px;
-                           border: 0;
-                           border-radius: 50%;
-                           font-size: 1.6rem;
-                           cursor: pointer;
-                           background: var(--bot);
-                           color: var(--ink)
-                  }
+      .x {
+         display: none;
+         width: 44px;
+         height: 44px;
+         border: 0;
+         border-radius: 50%;
+         font-size: 1.6rem;
+         cursor: pointer;
+         background: var(--bot);
+         color: var(--ink)
+      }
 
-                  .hint {
-                           margin: 4px 0 12px;
-                           color: var(--muted);
-                           font-size: .9rem
-                  }
+      .hint {
+         margin: 4px 0 12px;
+         color: var(--muted);
+         font-size: .9rem
+      }
 
-                  .feat {
-                           list-style: none;
-                           margin: 0;
-                           padding: 0;
-                           display: grid;
-                           gap: 10px
-                  }
+      .feat {
+         list-style: none;
+         margin: 0;
+         padding: 0;
+         display: grid;
+         gap: 10px
+      }
 
-                  .feat li {
-                           padding: 12px;
-                           border-radius: 14px;
-                           background: var(--bot);
-                           display: grid;
-                           gap: 6px
-                  }
+      .feat li {
+         padding: 12px;
+         border-radius: 14px;
+         background: var(--bot);
+         display: grid;
+         gap: 6px
+      }
 
-                  .feat b {
-                           font-size: .95rem
-                  }
+      .feat b {
+         font-size: .95rem
+      }
 
-                  .feat span {
-                           font-size: .85rem;
-                           color: var(--muted)
-                  }
+      .feat span {
+         font-size: .85rem;
+         color: var(--muted)
+      }
 
-                  .cmd {
-                           justify-self: start;
-                           text-align: left;
-                           height: auto;
-                           padding: 8px 14px
-                  }
+      .cmd {
+         justify-self: start;
+         text-align: left;
+         height: auto;
+         padding: 8px 14px
+      }
 
-                  #backdrop {
-                           display: none
-                  }
+      #backdrop {
+         display: none
+      }
 
-                  @media (max-width:899px) {
-                           #helpBtn {
-                                    display: inline-block
-                           }
+      @media (max-width:899px) {
+         #helpBtn {
+            display: inline-block
+         }
 
-                           aside {
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    bottom: 0;
-                                    z-index: 20;
-                                    width: min(88vw, 340px);
-                                    padding-top: max(16px, env(safe-area-inset-top));
-                                    box-shadow: -10px 0 30px rgba(0, 0, 0, .25);
-                                    transform: translateX(105%);
-                                    visibility: hidden;
-                                    transition: transform .25s, visibility 0s .25s;
-                           }
+         aside {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 20;
+            width: min(88vw, 340px);
+            padding-top: max(16px, env(safe-area-inset-top));
+            box-shadow: -10px 0 30px rgba(0, 0, 0, .25);
+            transform: translateX(105%);
+            visibility: hidden;
+            transition: transform .25s, visibility 0s .25s;
+         }
 
-                           .help-open aside {
-                                    transform: none;
-                                    visibility: visible;
-                                    transition: transform .25s
-                           }
+         .help-open aside {
+            transform: none;
+            visibility: visible;
+            transition: transform .25s
+         }
 
-                           .help-open #backdrop {
-                                    display: block;
-                                    position: absolute;
-                                    inset: 0;
-                                    z-index: 15;
-                                    background: rgba(0, 0, 0, .45)
-                           }
+         .help-open #backdrop {
+            display: block;
+            position: absolute;
+            inset: 0;
+            z-index: 15;
+            background: rgba(0, 0, 0, .45)
+         }
 
-                           .x {
-                                    display: block
-                           }
-                  }
+         .x {
+            display: block
+         }
+      }
 
-                  @media (min-width:900px) {
-                           #helpBtn {
-                                    display: none
-                           }
-                  }
+      @media (min-width:900px) {
+         #helpBtn {
+            display: none
+         }
+      }
 
-                  @media (max-width:520px) {
-                           header p {
-                                    display: none
-                           }
-                  }
+      @media (max-width:520px) {
+         header p {
+            display: none
+         }
+      }
 
-                  .confetti {
-                           position: fixed;
-                           top: -16px;
-                           width: 9px;
-                           height: 14px;
-                           z-index: 50;
-                           pointer-events: none;
-                           animation: fall 2.3s ease-in forwards
-                  }
+      .confetti {
+         position: fixed;
+         top: -16px;
+         width: 9px;
+         height: 14px;
+         z-index: 50;
+         pointer-events: none;
+         animation: fall 2.3s ease-in forwards
+      }
 
-                  @keyframes fall {
-                           to {
-                                    transform: translate3d(var(--x), 108vh, 0) rotate(560deg)
-                           }
-                  }
+      @keyframes fall {
+         to {
+            transform: translate3d(var(--x), 108vh, 0) rotate(560deg)
+         }
+      }
 
-                  @media (prefers-reduced-motion: reduce) {
-                           #mic.on {
-                                    animation: none
-                           }
+      @media (prefers-reduced-motion: reduce) {
+         #mic.on {
+            animation: none
+         }
 
-                           .confetti {
-                                    display: none
-                           }
+         .confetti {
+            display: none
+         }
 
-                           aside {
-                                    transition: none !important
-                           }
-                  }
-         </style>
+         aside {
+            transition: none !important
+         }
+      }
+
+      /* Birthday-first visual polish and motion */
+      :root {
+         --bg1: #fff4f8;
+         --bg2: #fff9ea;
+         --panel: #fffefd;
+         --ink: #35203e;
+         --muted: #786b83;
+         --accent: #d91f68;
+         --accent-ink: #fff;
+         --bot: #fff0f5;
+         --line: #f2dce7;
+         --teal: #137f76;
+         --hd1: #ef4778;
+         --hd2: #7144cf;
+         --chip: #fff3d6;
+         --chip-ink: #65480a;
+      }
+
+      .app {
+         background: radial-gradient(ellipse at 10% 0%, rgba(255, 226, 237, .55), transparent 38%), var(--panel);
+      }
+
+      header {
+         min-height: 76px;
+         background: linear-gradient(112deg, #e83e75 0%, #a942b2 55%, #6947d1 100%);
+      }
+
+      .logo {
+         filter: drop-shadow(0 2px 4px rgba(70, 14, 52, .22));
+         animation: logo-bob 3.2s ease-in-out infinite;
+      }
+
+      .stripe {
+         height: 5px;
+      }
+
+      .birthday-banner {
+         display: flex;
+         align-items: center;
+         gap: 12px;
+         margin: 12px 16px 0;
+         padding: 11px 14px;
+         border: 1px solid #f3d4a8;
+         border-radius: 16px;
+         background: linear-gradient(100deg, #fff5d8, #fff0f6 70%, #f4efff);
+         box-shadow: 0 5px 16px rgba(119, 61, 95, .08);
+      }
+
+      .banner-icon {
+         font-size: 1.55rem;
+         line-height: 1;
+      }
+
+      .banner-copy {
+         min-width: 0;
+         flex: 1;
+         display: grid;
+         line-height: 1.35;
+      }
+
+      .banner-copy strong {
+         font-size: .9rem;
+         color: #7d3b68;
+         letter-spacing: .02em;
+      }
+
+      .banner-copy span {
+         color: var(--ink);
+         font-size: .88rem;
+         overflow-wrap: anywhere;
+      }
+
+      .banner-count {
+         flex: none;
+         padding: 5px 10px;
+         border-radius: 999px;
+         background: #fff;
+         color: #7b3b75;
+         font-size: .76rem;
+         font-weight: 800;
+         border: 1px solid #efd9e8;
+      }
+
+      #log {
+         scroll-behavior: smooth;
+      }
+
+      .msg {
+         animation: message-in .28s cubic-bezier(.2, .7, .2, 1) both;
+         box-shadow: 0 2px 10px rgba(73, 36, 77, .045);
+      }
+
+      .msg.bot {
+         border: 1px solid rgba(223, 177, 199, .28);
+      }
+
+      .msg.user {
+         box-shadow: 0 5px 14px rgba(190, 31, 97, .18);
+      }
+
+      .chip,
+      .cmd,
+      .btn,
+      .hbtn {
+         transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+      }
+
+      .chip:hover,
+      .cmd:hover,
+      .btn:hover,
+      .hbtn:hover {
+         transform: translateY(-1px);
+         filter: brightness(1.035);
+      }
+
+      .btn {
+         box-shadow: 0 5px 13px rgba(187, 35, 99, .16);
+      }
+
+      input[type=text] {
+         transition: border-color .18s ease, box-shadow .18s ease;
+      }
+
+      input[type=text]:focus {
+         border-color: var(--accent);
+         box-shadow: 0 0 0 4px rgba(217, 31, 104, .10);
+         outline: none;
+      }
+
+      .feat li {
+         border: 1px solid rgba(223, 177, 199, .25);
+         transition: transform .18s ease, box-shadow .18s ease;
+      }
+
+      .feat li:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 8px 18px rgba(73, 36, 77, .08);
+      }
+
+      @keyframes message-in {
+         from {
+            opacity: 0;
+            transform: translateY(8px) scale(.99);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+         }
+      }
+
+      @keyframes logo-bob {
+
+         0%,
+         100% {
+            transform: translateY(0) rotate(-3deg);
+         }
+
+         50% {
+            transform: translateY(-3px) rotate(3deg);
+         }
+      }
+
+      @media (max-width:520px) {
+         .birthday-banner {
+            margin: 9px 10px 0;
+            padding: 10px;
+            gap: 9px;
+         }
+
+         .banner-count {
+            font-size: .7rem;
+            padding: 5px 8px;
+         }
+
+         .banner-copy span {
+            font-size: .82rem;
+         }
+      }
+
+      @media (max-width:420px) {
+         header {
+            gap: 6px;
+            padding-left: 10px;
+            padding-right: 10px;
+         }
+
+         .actions {
+            gap: 5px;
+         }
+
+         .hbtn {
+            padding-left: 9px;
+            padding-right: 9px;
+            font-size: .78rem;
+         }
+
+         #backupBtn {
+            min-width: 42px;
+            padding: 0 8px;
+         }
+
+         #backupBtn .backup-label {
+            display: none;
+         }
+      }
+
+      @media (prefers-color-scheme: dark) {
+         :root {
+            --bg1: #241729;
+            --bg2: #171020;
+            --panel: #21162b;
+            --ink: #f8effb;
+            --muted: #bdacc9;
+            --accent: #ff78a5;
+            --accent-ink: #351020;
+            --bot: #34233f;
+            --line: #49324f;
+            --teal: #37c7b6;
+            --hd1: #9d214f;
+            --hd2: #5035a0;
+            --chip: #493b22;
+            --chip-ink: #ffe39c;
+         }
+
+         .app {
+            background: radial-gradient(ellipse at 10% 0%, rgba(128, 48, 91, .18), transparent 38%), var(--panel);
+         }
+
+         .birthday-banner {
+            border-color: #60465e;
+            background: linear-gradient(100deg, #423522, #402738 70%, #302747);
+         }
+
+         .banner-copy strong {
+            color: #ffc2d8;
+         }
+
+         .banner-count {
+            background: #34233f;
+            color: #f2bfdf;
+            border-color: #60465e;
+         }
+
+         .msg.bot {
+            border-color: #51384f;
+         }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+
+         *,
+         *::before,
+         *::after {
+            scroll-behavior: auto !important;
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
+         }
+      }
+   </style>
 </head>
 
 <body>
-         <div class="app" id="app">
-                  <header>
-                           <div class="brand">
-                                    <span class="logo" aria-hidden="true">🎉</span>
-                                    <div>
-                                             <h1 id="appName">Dayminder</h1>
-                                             <p id="tagline"></p>
-                                    </div>
-                           </div>
-                           <div class="actions">
-                                    <button class="hbtn" id="helpBtn" type="button">Help</button>
-                                    <button class="hbtn" id="voiceToggle" type="button" aria-pressed="true">Voice:
-                                             on</button>
-                           </div>
-                  </header>
-                  <div class="stripe"></div>
-
-                  <div class="body">
-                           <section class="chat">
-                                    <button id="status" type="button" hidden></button>
-                                    <main id="log" aria-live="polite"></main>
-                                    <form id="chatForm" autocomplete="off">
-                                             <button class="btn" id="mic" type="button" aria-label="Speak">
-                                                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                                                               <path
-                                                                        d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.93V22h2v-3.07A8 8 0 0 0 20 11h-2z" />
-                                                      </svg>
-                                             </button>
-                                             <input type="text" id="text" placeholder="Ask in your own words..."
-                                                      aria-label="Message">
-                                             <button class="btn" type="submit">Send</button>
-                                    </form>
-                           </section>
-
-                           <aside id="panel" aria-label="Quick help">
-                                    <div class="ph">
-                                             <h2>Quick help</h2><button class="x" id="closeHelp" type="button"
-                                                      aria-label="Close help">×</button>
-                                    </div>
-                                    <p class="hint">Talk or type in simple words. Tap an example to try it. Examples
-                                             with a name go into the text box so you can change the name.</p>
-                                    <ul class="feat">
-                                             <li><b>See everything saved</b><span>Also works as "friends list", "what is
-                                                               saved" or "show my birthdays".</span><button class="cmd"
-                                                               data-mode="run" type="button">Show me the list</button>
-                                             </li>
-                                             <li><b>Save a date</b><span>Birthdays, anniversaries, weddings or any date.
-                                                               The year is optional.</span><button class="cmd"
-                                                               data-mode="fill" type="button">Add Riya birthday 14
-                                                               March</button></li>
-                                             <li><b>Save your own date</b><span>Say "my" or "our" instead of a
-                                                               name.</span><button class="cmd" data-mode="fill"
-                                                               type="button">Save our anniversary 5 June 2018</button>
-                                             </li>
-                                             <li><b>Find a date</b><span>Ask about one person.</span><button class="cmd"
-                                                               data-mode="fill" type="button">When is Riya's
-                                                               birthday?</button></li>
-                                             <li><b>Today</b><span>See what is special today.</span><button class="cmd"
-                                                               data-mode="run" type="button">Anything special
-                                                               today?</button></li>
-                                             <li><b>Coming up</b><span>Add "this week" or "this month" to narrow
-                                                               it.</span><button class="cmd" data-mode="run"
-                                                               type="button">What's coming up this month?</button></li>
-                                             <li><b>Only one kind</b><span>Birthdays, anniversaries, weddings and
-                                                               more.</span><button class="cmd" data-mode="run"
-                                                               type="button">Show my anniversaries</button></li>
-                                             <li><b>Remove a date</b><span>Deletes it on this device.</span><button
-                                                               class="cmd" data-mode="fill" type="button">Delete Riya's
-                                                               birthday</button></li>
-                                             <li><b>Talk to me</b><span>Tap the mic and speak. Replies are read aloud.
-                                                               Tap Voice to turn that off.</span></li>
-                                    </ul>
-                           </aside>
-                  </div>
-                  <div id="backdrop"></div>
+   <div class="app" id="app">
+      <header>
+         <div class="brand">
+            <span class="logo" aria-hidden="true">🎉</span>
+            <div>
+               <h1 id="appName">Dayminder</h1>
+               <p id="tagline"></p>
+            </div>
          </div>
+         <div class="actions">
+            <button class="hbtn" id="helpBtn" type="button">Help</button>
+            <button class="hbtn" id="voiceToggle" type="button" aria-pressed="true">Voice:
+               on</button>
+            <button class="hbtn" id="backupBtn" type="button" aria-label="Download a backup of all saved dates"
+               title="Download a backup">⬇ <span class="backup-label">Backup</span></button>
+         </div>
+      </header>
+      <div class="stripe"></div>
+      <section class="birthday-banner" aria-label="Birthdays in the next seven days" aria-live="polite">
+         <span class="banner-icon" aria-hidden="true">🎂</span>
+         <div class="banner-copy">
+            <strong>Birthday radar</strong>
+            <span id="upcomingBirthdays">Checking the next seven days…</span>
+         </div>
+         <span class="banner-count" id="birthdayCount">7-day view</span>
+      </section>
 
-         <script>
-                  /* =====================================================
-                     1. SETTINGS
-                     ===================================================== */
-                  const APP_NAME = 'Dayminder';                                        // rename the app here
-                  const TAGLINE = 'Birthdays, anniversaries and every date that matters';
-                  const LANG = 'en-IN';             // voice language: 'en-US', 'en-GB', 'hi-IN', ...
-                  const DEFAULT_TYPE = 'birthday';  // used when someone says "Add Riya 14 March" with no type
-                  const STORE_KEY = 'dm_store_v3';  // browser storage name
+      <div class="body">
+         <section class="chat">
+            <button id="status" type="button" hidden></button>
+            <main id="log" aria-live="polite"></main>
+            <form id="chatForm" autocomplete="off">
+               <button class="btn" id="mic" type="button" aria-label="Speak">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                     <path
+                        d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4zm6-4a6 6 0 0 1-12 0H4a8 8 0 0 0 7 7.93V22h2v-3.07A8 8 0 0 0 20 11h-2z" />
+                  </svg>
+               </button>
+               <input type="text" id="text" placeholder="Ask in your own words..." aria-label="Message">
+               <button class="btn" type="submit">Send</button>
+            </form>
+         </section>
 
-                  /* Kinds of dates. "name": [words people may say]. Add your own kinds here.
-                     Keep singular words first. Put "anniversary" before "wedding" so
-                     "wedding anniversary" is read as an anniversary. */
-                  const TYPES = {
-                           'birthday': ['birthday', 'birthdays', 'bday', 'bdays', 'born'],
-                           'anniversary': ['anniversary', 'anniversaries'],
-                           'wedding': ['wedding', 'weddings', 'marriage', 'marriages', 'married', 'marry'],
-                           'engagement': ['engagement', 'engagements', 'engaged'],
-                           'graduation': ['graduation', 'graduations', 'graduated', 'convocation'],
-                           'special date': ['special date', 'special dates', 'special day', 'special days', 'occasion', 'occasions', 'event', 'events']
-                  };
+         <aside id="panel" aria-label="Quick help">
+            <div class="ph">
+               <h2>Quick help</h2><button class="x" id="closeHelp" type="button" aria-label="Close help">×</button>
+            </div>
+            <p class="hint">Talk or type in simple words. Tap an example to try it. Examples
+               with a name go into the text box so you can change the name.</p>
+            <ul class="feat">
+               <li><b>See everything saved</b><span>Also works as "friends list", "what is
+                     saved" or "show my birthdays".</span><button class="cmd" data-mode="run" type="button">Show me the
+                     list</button>
+               </li>
+               <li><b>Save a date</b><span>Birthdays, anniversaries, weddings or any date.
+                     The year is optional.</span><button class="cmd" data-mode="fill" type="button">Add Riya birthday 14
+                     March</button></li>
+               <li><b>Save your own date</b><span>Say "my" or "our" instead of a
+                     name.</span><button class="cmd" data-mode="fill" type="button">Save our anniversary 5 June
+                     2018</button>
+               </li>
+               <li><b>Find a date</b><span>Ask about one person.</span><button class="cmd" data-mode="fill"
+                     type="button">When is Riya's
+                     birthday?</button></li>
+               <li><b>Today</b><span>See what is special today.</span><button class="cmd" data-mode="run"
+                     type="button">Anything special
+                     today?</button></li>
+               <li><b>Coming up</b><span>Add "this week" or "this month" to narrow
+                     it.</span><button class="cmd" data-mode="run" type="button">What's coming up this month?</button>
+               </li>
+               <li><b>Only one kind</b><span>Birthdays, anniversaries, weddings and
+                     more.</span><button class="cmd" data-mode="run" type="button">Show my anniversaries</button></li>
+               <li><b>Remove a date</b><span>Deletes it on this device.</span><button class="cmd" data-mode="fill"
+                     type="button">Delete Riya's
+                     birthday</button></li>
+               <li><b>Ask a custom question</b><span>Try a built-in question, or add your own keyword-and-reply pairs in
+                     the reply dictionary.</span><button class="cmd" data-mode="run" type="button">Who created
+                     it?</button></li>
+               <li><b>Back up or move your dates</b><span>Download a JSON backup of all saved dates, then restore it
+                     from Quick help on another browser or device.</span><button class="cmd" id="restoreBtn"
+                     type="button">Restore a backup</button></li>
+               <li><b>Talk to me</b><span>Tap the mic and speak. Replies are read aloud.
+                     Tap Voice to turn that off.</span></li>
+            </ul>
+         </aside>
+      </div>
+      <div id="backdrop"></div>
+      <input id="restoreFile" type="file" accept=".json,application/json" hidden
+         aria-label="Choose a Dayminder backup file">
+   </div>
 
-                  /* =====================================================
-                     2. YOUR DICTIONARIES - PASTE / EDIT YOUR OWN HERE
-                     ===================================================== */
+   <script>
+      /* =====================================================
+         1. SETTINGS
+         ===================================================== */
+      const APP_NAME = 'Dayminder';                                        // rename the app here
+      const TAGLINE = 'Birthdays, anniversaries and every date that matters';
+      const LANG = 'en-IN';             // voice language: 'en-US', 'en-GB', 'hi-IN', ...
+      const DEFAULT_TYPE = 'birthday';  // used when someone says "Add Riya 14 March" with no type
+      const STORE_KEY = 'dm_store_v3';  // browser storage name
 
-                  /* 2a. Your main dates list (shown on every device, visible in page source).
-                         m = month number 1-12, y = year (optional), type = optional kind. Examples:
-                           { name: "Riya", d: 14, m: 3 },
-                           { name: "Aman", d: 2, m: 11, y: 2001 },
-                           { name: "Us", type: "anniversary", d: 5, m: 6, y: 2018 },            */
-                  const DATES_DICTIONARY = [{ name: "Arna", type: "birthday", d: 18, m: 6 }];
+      /* Kinds of dates. "name": [words people may say]. Add your own kinds here.
+         Keep singular words first. Put "anniversary" before "wedding" so
+         "wedding anniversary" is read as an anniversary. */
+      const TYPES = {
+         'birthday': ['birthday', 'birthdays', 'bday', 'bdays', 'born'],
+         'anniversary': ['anniversary', 'anniversaries'],
+         'wedding': ['wedding', 'weddings', 'marriage', 'marriages', 'married', 'marry'],
+         'engagement': ['engagement', 'engagements', 'engaged'],
+         'graduation': ['graduation', 'graduations', 'graduated', 'convocation'],
+         'special date': ['special date', 'special dates', 'special day', 'special days', 'occasion', 'occasions', 'event', 'events']
+      };
 
-                  /* 2b. Your reply dictionary: "keyword": "reply"  or  "keyword": ["reply 1", "reply 2"] */
-                  const DICTIONARY = {
-                           "hello": ["Hello! Ask me about any saved date.", "Hi there! What date are we checking?"],
-                           "hi": "Hi! Say help to see what I can do.",
-                           "how are you": "I'm doing great, thanks for asking!",
-                           "thank you": "You're welcome!",
-                           "thanks": "Anytime!",
-                           "bye": "Goodbye! I'll keep your dates safe."
-                  };
-                  /* ===================================================== */
+      /* =====================================================
+         2. YOUR DICTIONARIES - PASTE / EDIT YOUR OWN HERE
+         ===================================================== */
 
-                  const HELP = "I can save any date that matters, find it later, and tell you what is coming up. Just ask in your own words, or open Quick help for examples.";
-                  const FALLBACK = "I didn't get that. Say help to see what I can do.";
-                  const EMPTY = 'Nothing saved yet. Try: Add Riya birthday 14 March.';
+      /* 2a. Your main dates list (shown on every device, visible in page source).
+             m = month number 1-12, y = year (optional), type = optional kind. Examples:
+               { name: "Riya", d: 14, m: 3 },
+               { name: "Aman", d: 2, m: 11, y: 2001 },
+               { name: "Us", type: "anniversary", d: 5, m: 6, y: 2018 },            */
+      const DATES_DICTIONARY = [{ name: "Arna", type: "birthday", d: 18, m: 6 }];
 
-                  /* ---------- storage: your list + this device's changes ---------- */
-                  let store = { custom: [], removed: [] };
-                  try {
-                           const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
-                           if (s) store = { custom: s.custom || [], removed: s.removed || [] };
-                           else {  /* bring over entries saved by the older Birthday Buddy version */
-                                    const o = JSON.parse(localStorage.getItem('bb_store_v2') || 'null');
-                                    if (o) store = { custom: (o.custom || []).map(f => ({ ...f, type: 'birthday' })), removed: (o.removed || []).map(k => k + '|birthday') };
-                           }
-                  } catch (e) { }
-                  const persist = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) { } };
+      /* 2b. Your reply dictionary: "keyword": "reply"  or  "keyword": ["reply 1", "reply 2"] */
+      const DICTIONARY = {
+         "hello": ["Hello! Ask me about any saved date.", "Hi there! What date are we checking?"],
+         "hi": "Hi! Say help to see what I can do.",
+         "how are you": "I'm doing great, thanks for asking!",
+         "who created it": "I was programmed by Debangshu Sir",
+         "thank you": "You're welcome!",
+         "thanks": "Anytime!",
+         "bye": "Goodbye! I'll keep your dates safe."
+      };
+      /* ===================================================== */
 
-                  const keyOf = f => f.name.toLowerCase() + '|' + f.type.toLowerCase();
-                  function getEntries() {
-                           const map = new Map();
-                           DATES_DICTIONARY.forEach(x => {
-                                    const f = { name: x.name, type: (x.type || DEFAULT_TYPE).toLowerCase(), d: x.d, m: x.m - 1, y: x.y || null };
-                                    if (!store.removed.includes(keyOf(f))) map.set(keyOf(f), f);
-                           });
-                           store.custom.forEach(f => map.set(keyOf(f), f));
-                           return [...map.values()];
-                  }
+      const HELP = "I can save any date that matters, find it later, and tell you what is coming up. Just ask in your own words, or open Quick help for examples.";
+      const FALLBACK = "I can help with birthdays, anniversaries, and other dates you save. Try asking me to add a date, check what is coming up, or open Help for examples.";
+      const EMPTY = 'Nothing saved yet. Try: Add Riya birthday 14 March.';
 
-                  /* ---------- dates ---------- */
-                  const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-                  const DIM = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-                  const cap = s => s.replace(/\b\p{L}/gu, c => c.toUpperCase());
-                  const monthIdx = w => (!w || w.length < 3) ? -1 : MONTHS.findIndex(n => n.startsWith(w));
-                  const validDM = (d, m) => m >= 0 && m < 12 && d >= 1 && d <= DIM[m];
+      /* ---------- storage: your list + this device's changes ---------- */
+      let store = { custom: [], removed: [] };
+      try {
+         const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+         if (s) store = { custom: s.custom || [], removed: s.removed || [] };
+         else {  /* bring over entries saved by the older Birthday Buddy version */
+            const o = JSON.parse(localStorage.getItem('bb_store_v2') || 'null');
+            if (o) store = { custom: (o.custom || []).map(f => ({ ...f, type: 'birthday' })), removed: (o.removed || []).map(k => k + '|birthday') };
+         }
+      } catch (e) { }
+      const persist = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) { } };
 
-                  function fixYear(y) {
-                           if (!y) return null;
-                           y = +y; if (y < 100) y += y > 30 ? 1900 : 2000;
-                           return (y >= 1900 && y <= new Date().getFullYear()) ? y : null;
-                  }
+      const keyOf = f => f.name.toLowerCase() + '|' + f.type.toLowerCase();
+      function getEntries() {
+         const map = new Map();
+         DATES_DICTIONARY.forEach(x => {
+            const f = { name: x.name, type: (x.type || DEFAULT_TYPE).toLowerCase(), d: x.d, m: x.m - 1, y: x.y || null };
+            if (!store.removed.includes(keyOf(f))) map.set(keyOf(f), f);
+         });
+         store.custom.forEach(f => map.set(keyOf(f), f));
+         return [...map.values()];
+      }
 
-                  function findDate(raw) {
-                           const s = raw.toLowerCase().replace(/(\d)(st|nd|rd|th)\b/g, '$1');
-                           const tries = [
-                                    { re: /\b(\d{1,2})\s*(?:of\s+)?([a-z]{3,9})\b(?:,?\s*(\d{4}))?/g, get: m => [+m[1], monthIdx(m[2]), m[3]] },
-                                    { re: /\b([a-z]{3,9})\s+(\d{1,2})\b(?:,?\s*(\d{4}))?/g, get: m => [+m[2], monthIdx(m[1]), m[3]] },
-                                    { re: /\b(\d{1,2})[\/\-.](\d{1,2})(?:[\/\-.](\d{2,4}))?\b/g, get: m => [+m[1], +m[2] - 1, m[3]] }
-                           ];
-                           for (const t of tries) {
-                                    for (const m of s.matchAll(t.re)) {
-                                             const [d, mo, y] = t.get(m);
-                                             if (validDM(d, mo)) return { d, m: mo, y: fixYear(y), rest: s.slice(0, m.index) + ' ' + s.slice(m.index + m[0].length) };
-                                    }
-                           }
-                           return null;
-                  }
+      /* ---------- dates ---------- */
+      const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+      const DIM = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      const cap = s => s.replace(/\b\p{L}/gu, c => c.toUpperCase());
+      const monthIdx = w => (!w || w.length < 3) ? -1 : MONTHS.findIndex(n => n.startsWith(w));
+      const validDM = (d, m) => m >= 0 && m < 12 && d >= 1 && d <= DIM[m];
 
-                  function daysUntil(f) {
-                           const now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                           let next = new Date(now.getFullYear(), f.m, f.d);
-                           if (next < today) next = new Date(now.getFullYear() + 1, f.m, f.d);
-                           return { days: Math.round((next - today) / 864e5), year: next.getFullYear() };
-                  }
-                  const fmt = f => f.d + ' ' + cap(MONTHS[f.m]) + (f.y ? ' ' + f.y : '');
-                  const byNext = a => a.sort((x, y) => daysUntil(x).days - daysUntil(y).days);
-                  const poss = f => f.name === 'Me' ? 'Your' : f.name === 'Us' ? 'Our' : f.name + "'s";
-                  const title = f => poss(f) + ' ' + f.type;
-                  const plural = t => t.endsWith('y') ? t.slice(0, -1) + 'ies' : t + 's';
-                  const inDays = f => { const d = daysUntil(f).days; return d === 0 ? 'today' : 'in ' + d + (d === 1 ? ' day' : ' days'); };
+      function fixYear(y) {
+         if (!y) return null;
+         y = +y; if (y < 100) y += y > 30 ? 1900 : 2000;
+         return (y >= 1900 && y <= new Date().getFullYear()) ? y : null;
+      }
 
-                  /* =====================================================
-                     3. NATURAL LANGUAGE ENGINE
-                     Reads the sentence, ignores polite filler, spots the intent
-                     (save, find, show, today, upcoming, delete, help), the kind of
-                     date, the date itself and the person - in any wording.
-                     ===================================================== */
-                  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                  const TYPE_RE = Object.entries(TYPES).map(([k, w]) => [k, new RegExp('\\b(' + w.map(esc).join('|') + ')\\b')]);
-                  const detectType = s => { for (const [k, re] of TYPE_RE) if (re.test(s)) return k; return null; };
-                  const SING = new RegExp('\\b(my|our)\\s+(?:\\p{L}+\\s+)?(' + Object.values(TYPES).flat().filter(w => !w.endsWith('s')).map(esc).join('|') + ')\\b', 'u');
+      function findDate(raw) {
+         const s = raw.toLowerCase().replace(/(\d)(st|nd|rd|th)\b/g, '$1');
+         const tries = [
+            { re: /\b(\d{1,2})\s*(?:of\s+)?([a-z]{3,9})\b(?:,?\s*(\d{4}))?/g, get: m => [+m[1], monthIdx(m[2]), m[3]] },
+            { re: /\b([a-z]{3,9})\s+(\d{1,2})\b(?:,?\s*(\d{4}))?/g, get: m => [+m[2], monthIdx(m[1]), m[3]] },
+            { re: /\b(\d{1,2})[\/\-.](\d{1,2})(?:[\/\-.](\d{2,4}))?\b/g, get: m => [+m[1], +m[2] - 1, m[3]] }
+         ];
+         for (const t of tries) {
+            for (const m of s.matchAll(t.re)) {
+               const [d, mo, y] = t.get(m);
+               if (validDM(d, mo)) return { d, m: mo, y: fixYear(y), rest: s.slice(0, m.index) + ' ' + s.slice(m.index + m[0].length) };
+            }
+         }
+         return null;
+      }
 
-                  const R = {
-                           help: /\b(help|guide|instructions?|commands?|features?|how (do|to|can)|what can you do|how does this work)\b/,
-                           del: /\b(delete|remove|forget|erase|clear|drop|discard|cancel|get rid of|take off)\b/,
-                           add: /\b(add|save|store|remember|note|record|keep|set|put|register|create|log|enter|insert|include|schedule)\b/,
-                           today: /\b(today|tonight)\b/,
-                           upcoming: /\b(upcoming|next|soon|coming|nearest|closest|approaching|remaining)\b|\bthis (week|month)\b/,
-                           list: /\b(list|lists|all|everything|everyone|everybody|saved|stored|entries|records|names|people|friends?|family|whoever|so far|already|available|added|existing|current|dates|birthdays|anniversaries|weddings)\b/,
-                           show: /\b(show|display|see|view|open|give|tell|list|check|find|get|fetch|read|bring|pull|what|which|who|whose|any|anything)\b/,
-                           when: /\b(when|what day|which day|what date|which date|date of|how many days|how long|how soon|days (left|until|to))\b/
-                  };
-                  const LEAD = /\b(please|kindly|hey|hello|hi|okay|ok|could you|can you|would you|will you|i want to|i would like to|i'd like to|i wanna|i need to|i need|let me|show me|tell me|give me|help me|remind me|do you know|do you remember|go ahead and)\b/g;
-                  const RELATION = /\b(my|our)\s+(friend|friends|mom|mother|dad|father|wife|husband|brother|sister|son|daughter|boss|colleague|cousin|uncle|aunt|partner|girlfriend|boyfriend|bestie|buddy)\b/;
+      function daysUntil(f) {
+         const now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+         let next = new Date(now.getFullYear(), f.m, f.d);
+         if (next < today) next = new Date(now.getFullYear() + 1, f.m, f.d);
+         return { days: Math.round((next - today) / 864e5), year: next.getFullYear() };
+      }
+      const fmt = f => f.d + ' ' + cap(MONTHS[f.m]) + (f.y ? ' ' + f.y : '');
+      const byNext = a => a.sort((x, y) => daysUntil(x).days - daysUntil(y).days);
+      const poss = f => f.name === 'Me' ? 'Your' : f.name === 'Us' ? 'Our' : f.name + "'s";
+      const title = f => poss(f) + ' ' + f.type;
+      const plural = t => t.endsWith('y') ? t.slice(0, -1) + 'ies' : t + 's';
+      const inDays = f => { const d = daysUntil(f).days; return d === 0 ? 'today' : 'in ' + d + (d === 1 ? ' day' : ' days'); };
 
-                  /* words that are never part of a name */
-                  const STOP = new Set(('a an the of for to on in at by as is are was am be been it its this that these those there here and or also with from into about please i me my mine we us our ours you your yours he she him her his hers they them their ' +
-                           'add save store remember note record keep set put register create log enter insert include schedule delete remove forget erase clear drop discard cancel show display see view open give tell list check find get fetch read bring pull ' +
-                           'what which who whose whoever when how any anything all everything everyone everybody date dates day days friend friends person people name names called named saved stored already today tomorrow next upcoming soon coming ' +
-                           'do does did can could would should have has had not no yes ok okay hey hello hi so then new falls fall celebrate celebrated web app website site system ' + Object.values(TYPES).flat().join(' ')).split(' ').filter(w => w.indexOf(' ') < 0));
+      function updateBirthdayBanner() {
+         const text = document.getElementById('upcomingBirthdays');
+         const count = document.getElementById('birthdayCount');
+         if (!text || !count) return;
+         const upcoming = byNext(getEntries().filter(f => f.type === 'birthday' && daysUntil(f).days <= 7));
+         if (!upcoming.length) {
+            text.textContent = 'No birthdays in the next 7 days. Add one anytime.';
+            count.textContent = 'ALL CLEAR';
+            return;
+         }
+         text.textContent = upcoming.map(f => title(f) + ' — ' + inDays(f)).join(' · ');
+         count.textContent = upcoming.length + (upcoming.length === 1 ? ' birthday' : ' birthdays');
+      }
 
-                  const norm = s => s.toLowerCase().replace(/[’‘]/g, "'")
-                           .replace(/\b(what|who|where|when|how|that|there|here|it)'s\b/g, '$1 is')
-                           .replace(/[^\p{L}\p{N}\s'\/.\-,]/gu, ' ').replace(/\s+/g, ' ').trim();
-                  const leftover = s => s.replace(/'s\b/g, '').replace(/[^\p{L}\s]/gu, ' ').split(/\s+/).filter(w => w && !STOP.has(w)).join(' ');
+      /* =====================================================
+         3. NATURAL LANGUAGE ENGINE
+         Reads the sentence, ignores polite filler, spots the intent
+         (save, find, show, today, upcoming, delete, help), the kind of
+         date, the date itself and the person - in any wording.
+         ===================================================== */
+      const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const TYPE_RE = Object.entries(TYPES).map(([k, w]) => [k, new RegExp('\\b(' + w.map(esc).join('|') + ')\\b')]);
+      const detectType = s => { for (const [k, re] of TYPE_RE) if (re.test(s)) return k; return null; };
+      const SING = new RegExp('\\b(my|our)\\s+(?:\\p{L}+\\s+)?(' + Object.values(TYPES).flat().filter(w => !w.endsWith('s')).map(esc).join('|') + ')\\b', 'u');
 
-                  function mentioned(core, n) {
-                           const s = ' ' + core.replace(/'s\b/g, '').replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ') + ' ';
-                           const own = (R.when.test(n) || SING.test(n)) ? (/\b(my|mine|myself)\b/.test(n) ? 'me' : /\b(our|ours)\b/.test(n) ? 'us' : '') : '';
-                           const r = getEntries().filter(f => { const k = f.name.toLowerCase(); return (k === 'me' || k === 'us') ? k === own : s.includes(' ' + k + ' '); });
-                           const named = r.filter(f => f.name !== 'Me' && f.name !== 'Us');
-                           return named.length ? named : r;
-                  }
-                  const narrow = (h, n, type) => {
-                           if (type) return h.filter(f => f.type === type);
-                           const b = h.filter(f => n.includes(f.type));
-                           return b.length ? b : h;
-                  };
+      const R = {
+         help: /\b(help|guide|instructions?|commands?|features?|how (do|to|can)|what can you do|how does this work)\b/,
+         del: /\b(delete|remove|forget|erase|clear|drop|discard|cancel|get rid of|take off)\b/,
+         add: /\b(add|save|store|remember|note|record|keep|set|put|register|create|log|enter|insert|include|schedule)\b/,
+         today: /\b(today|tonight)\b/,
+         upcoming: /\b(upcoming|next|soon|coming|nearest|closest|approaching|remaining)\b|\bthis (week|month)\b/,
+         list: /\b(list|lists|all|everything|everyone|everybody|saved|stored|entries|records|names|people|friends?|family|whoever|so far|already|available|added|existing|current|dates|birthdays|anniversaries|weddings)\b/,
+         show: /\b(show|display|see|view|open|give|tell|list|check|find|get|fetch|read|bring|pull|what|which|who|whose|any|anything)\b/,
+         when: /\b(when|what day|which day|what date|which date|date of|how many days|how long|how soon|days (left|until|to))\b/
+      };
+      const LEAD = /\b(please|kindly|hey|hello|hi|okay|ok|could you|can you|would you|will you|i want to|i would like to|i'd like to|i wanna|i need to|i need|let me|show me|tell me|give me|help me|remind me|do you know|do you remember|go ahead and)\b/g;
+      const RELATION = /\b(my|our)\s+(friend|friends|mom|mother|dad|father|wife|husband|brother|sister|son|daughter|boss|colleague|cousin|uncle|aunt|partner|girlfriend|boyfriend|bestie|buddy)\b/;
 
-                  function parseWho(rest) {
-                           const r = rest.replace(LEAD, ' ').replace(/\s+/g, ' ').trim();
-                           const type = detectType(r);
-                           const owner = /\b(my|mine|myself|i)\b/.test(r) ? 'Me' : /\b(our|ours|we)\b/.test(r) ? 'Us' : '';
-                           let name = cap(leftover(r)), label = null;
-                           if (!type) {  /* custom kinds like "Dad's retirement" or "my driving test" */
-                                    const pm = r.match(/([\p{L}]+)'s\s+([\p{L} ]+)/u), om = r.match(/\b(my|our)\s+([\p{L} ]+)/u);
-                                    if (pm && leftover(pm[2])) { name = cap(pm[1]); label = leftover(pm[2]); }
-                                    else if (!RELATION.test(r) && om && leftover(om[2])) { name = om[1] === 'my' ? 'Me' : 'Us'; label = leftover(om[2]); }
-                           }
-                           if (!name && owner && (type || label)) name = owner;
-                           if (!name && type) name = 'Me';
-                           return name ? { name, type: type || label || DEFAULT_TYPE } : null;
-                  }
+      /* words that are never part of a name */
+      const STOP = new Set(('a an the of for to on in at by as is are was am be been it its this that these those there here and or also with from into about please i me my mine we us our ours you your yours he she him her his hers they them their ' +
+         'add save store remember note record keep set put register create log enter insert include schedule delete remove forget erase clear drop discard cancel show display see view open give tell list check find get fetch read bring pull ' +
+         'what which who whose whoever when how any anything all everything everyone everybody date dates day days friend friends person people name names called named saved stored already today tomorrow next upcoming soon coming ' +
+         'do does did can could would should have has had not no yes ok okay hey hello hi so then new falls fall celebrate celebrated web app website site system ' + Object.values(TYPES).flat().join(' ')).split(' ').filter(w => w.indexOf(' ') < 0));
 
-                  /* ---------- replies ---------- */
-                  function addEntry(w, dt) {
-                           const f = { name: w.name, type: w.type, d: dt.d, m: dt.m, y: dt.y }, k = keyOf(f);
-                           const existed = getEntries().some(x => keyOf(x) === k);
-                           store.custom = store.custom.filter(x => keyOf(x) !== k);
-                           store.custom.push(f);
-                           store.removed = store.removed.filter(x => x !== k);
-                           persist();
-                           return (existed ? 'Updated! ' : 'Saved! ') + title(f) + ' is on ' + fmt(f) + '.' + (daysUntil(f).days === 0 ? " That's today! 🎉" : ' 🎈');
-                  }
+      const norm = s => s.toLowerCase().replace(/[’‘]/g, "'")
+         .replace(/\b(what|who|where|when|how|that|there|here|it)'s\b/g, '$1 is')
+         .replace(/[^\p{L}\p{N}\s'\/.\-,]/gu, ' ').replace(/\s+/g, ' ').trim();
+      const leftover = s => s.replace(/'s\b/g, '').replace(/[^\p{L}\s]/gu, ' ').split(/\s+/).filter(w => w && !STOP.has(w)).join(' ');
 
-                  function removeEntry(f) {
-                           const k = keyOf(f);
-                           store.custom = store.custom.filter(x => keyOf(x) !== k);
-                           if (!store.removed.includes(k)) store.removed.push(k);
-                           persist();
-                  }
+      function mentioned(core, n) {
+         const s = ' ' + core.replace(/'s\b/g, '').replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ') + ' ';
+         const own = (R.when.test(n) || SING.test(n)) ? (/\b(my|mine|myself)\b/.test(n) ? 'me' : /\b(our|ours)\b/.test(n) ? 'us' : '') : '';
+         const r = getEntries().filter(f => { const k = f.name.toLowerCase(); return (k === 'me' || k === 'us') ? k === own : s.includes(' ' + k + ' '); });
+         const named = r.filter(f => f.name !== 'Me' && f.name !== 'Us');
+         return named.length ? named : r;
+      }
+      const narrow = (h, n, type) => {
+         if (type) return h.filter(f => f.type === type);
+         const b = h.filter(f => n.includes(f.type));
+         return b.length ? b : h;
+      };
 
-                  function whenReply(f) {
-                           const u = daysUntil(f);
-                           if (u.days === 0) return title(f) + ' is today! 🎉';
-                           let extra = '';
-                           if (f.y) { const n = u.year - f.y; extra = f.type === 'birthday' ? ', turning ' + n : ', marking ' + n + (n === 1 ? ' year' : ' years'); }
-                           return title(f) + ' is on ' + fmt(f) + ', ' + inDays(f) + extra + '. 🎈';
-                  }
+      function parseWho(rest) {
+         const r = rest.replace(LEAD, ' ').replace(/\s+/g, ' ').trim();
+         const type = detectType(r);
+         const owner = /\b(my|mine|myself|i)\b/.test(r) ? 'Me' : /\b(our|ours|we)\b/.test(r) ? 'Us' : '';
+         let name = cap(leftover(r)), label = null;
+         if (!type) {  /* custom kinds like "Dad's retirement" or "my driving test" */
+            const pm = r.match(/([\p{L}]+)'s\s+([\p{L} ]+)/u), om = r.match(/\b(my|our)\s+([\p{L} ]+)/u);
+            if (pm && leftover(pm[2])) { name = cap(pm[1]); label = leftover(pm[2]); }
+            else if (!RELATION.test(r) && om && leftover(om[2])) { name = om[1] === 'my' ? 'Me' : 'Us'; label = leftover(om[2]); }
+         }
+         if (!name && owner && (type || label)) name = owner;
+         if (!name && type) name = 'Me';
+         return name ? { name, type: type || label || DEFAULT_TYPE } : null;
+      }
 
-                  function listReply(type) {
-                           const l = byNext(getEntries().filter(f => !type || f.type === type));
-                           if (!l.length) return type ? 'No ' + plural(type) + ' saved yet. Try: Add Riya ' + type + ' 14 March.' : EMPTY;
-                           const head = type ? (l.length === 1 ? type : plural(type)) : 'saved date' + (l.length === 1 ? '' : 's');
-                           return {
-                                    text: 'You have ' + l.length + ' ' + head + ':\n' + l.map(f => title(f) + ': ' + fmt(f)).join('\n'),
-                                    chips: l.map(f => ({ label: type ? f.name : f.name + ' (' + f.type + ')', run: () => whenReply(f) }))
-                           };
-                  }
+      /* ---------- replies ---------- */
+      function addEntry(w, dt) {
+         const f = { name: w.name, type: w.type, d: dt.d, m: dt.m, y: dt.y }, k = keyOf(f);
+         const existed = getEntries().some(x => keyOf(x) === k);
+         store.custom = store.custom.filter(x => keyOf(x) !== k);
+         store.custom.push(f);
+         store.removed = store.removed.filter(x => x !== k);
+         persist();
+         updateBirthdayBanner();
+         return (existed ? 'Updated! ' : 'Saved! ') + title(f) + ' is on ' + fmt(f) + '.' + (daysUntil(f).days === 0 ? " That's today! 🎉" : ' 🎈');
+      }
 
-                  function todayReply(type) {
-                           const l = getEntries().filter(f => daysUntil(f).days === 0 && (!type || f.type === type));
-                           return l.length ? 'Today: ' + l.map(title).join(', ') + '. 🎉' : (type ? 'No ' + plural(type) + ' today.' : 'Nothing is saved for today.');
-                  }
+      function removeEntry(f) {
+         const k = keyOf(f);
+         store.custom = store.custom.filter(x => keyOf(x) !== k);
+         if (!store.removed.includes(k)) store.removed.push(k);
+         persist();
+         updateBirthdayBanner();
+      }
 
-                  function upcomingReply(n, type) {
-                           const win = /\bthis week\b/.test(n) ? 7 : /\bthis month\b/.test(n) ? 31 : 0;
-                           let l = byNext(getEntries().filter(f => !type || f.type === type));
-                           l = win ? l.filter(f => daysUntil(f).days <= win) : l.slice(0, 5);
-                           if (!l.length) return win ? 'Nothing in the next ' + win + ' days.' : EMPTY;
-                           return 'Coming up:\n' + l.map(f => title(f) + ': ' + fmt(f) + ' (' + inDays(f) + ')').join('\n');
-                  }
+      function whenReply(f) {
+         const u = daysUntil(f);
+         if (u.days === 0) return title(f) + ' is today! 🎉';
+         let extra = '';
+         if (f.y) { const n = u.year - f.y; extra = f.type === 'birthday' ? ', turning ' + n : ', marking ' + n + (n === 1 ? ' year' : ' years'); }
+         return title(f) + ' is on ' + fmt(f) + ', ' + inDays(f) + extra + '. 🎈';
+      }
 
-                  function onDateReply(dt, type) {
-                           const l = getEntries().filter(f => f.d === dt.d && f.m === dt.m && (!type || f.type === type));
-                           const d = dt.d + ' ' + cap(MONTHS[dt.m]);
-                           return l.length ? 'On ' + d + ': ' + l.map(title).join(', ') + '.' : 'Nothing is saved for ' + d + '.';
-                  }
+      function listReply(type) {
+         const l = byNext(getEntries().filter(f => !type || f.type === type));
+         if (!l.length) return type ? 'No ' + plural(type) + ' saved yet. Try: Add Riya ' + type + ' 14 March.' : EMPTY;
+         const head = type ? (l.length === 1 ? type : plural(type)) : 'saved date' + (l.length === 1 ? '' : 's');
+         return {
+            text: 'You have ' + l.length + ' ' + head + ':\n' + l.map(f => title(f) + ': ' + fmt(f)).join('\n'),
+            chips: l.map(f => ({ label: type ? f.name : f.name + ' (' + f.type + ')', run: () => whenReply(f) }))
+         };
+      }
 
-                  function deleteReply(n, type, names) {
-                           const res = narrow(names, n, type);
-                           if (!res.length) return "I couldn't find that. Say \"show me the list\" to see what is saved.";
-                           if (res.length > 1) return 'Which one should I remove? ' + res.map(title).join(', ') + '. For example: Delete ' + title(res[0]) + '.';
-                           removeEntry(res[0]);
-                           return 'Removed ' + title(res[0]) + '.';
-                  }
+      function todayReply(type) {
+         const l = getEntries().filter(f => daysUntil(f).days === 0 && (!type || f.type === type));
+         return l.length ? 'Today: ' + l.map(title).join(', ') + '. 🎉' : (type ? 'No ' + plural(type) + ' today.' : 'Nothing is saved for today.');
+      }
 
-                  function dictionaryReply(n, exact) {
-                           const plain = n.replace(/[^\p{L}\p{N}\s]/gu, '').trim();
-                           for (const k in DICTIONARY) {
-                                    const hit = exact ? plain === k.toLowerCase() : new RegExp('\\b' + esc(k.toLowerCase()) + '\\b').test(n);
-                                    if (hit) { const v = DICTIONARY[k]; return Array.isArray(v) ? v[Math.floor(Math.random() * v.length)] : v; }
-                           }
-                           return null;
-                  }
+      function upcomingReply(n, type) {
+         const win = /\bthis week\b/.test(n) ? 7 : /\bthis month\b/.test(n) ? 31 : 0;
+         let l = byNext(getEntries().filter(f => !type || f.type === type));
+         l = win ? l.filter(f => daysUntil(f).days <= win) : l.slice(0, 5);
+         if (!l.length) return win ? 'Nothing in the next ' + win + ' days.' : EMPTY;
+         return 'Coming up:\n' + l.map(f => title(f) + ': ' + fmt(f) + ' (' + inDays(f) + ')').join('\n');
+      }
 
-                  function handle(text) {
-                           const n = norm(text);
-                           const core = n.replace(LEAD, ' ').replace(/\s+/g, ' ').trim();
-                           const ex = dictionaryReply(n, true);
-                           if (ex) return ex;
+      function onDateReply(dt, type) {
+         const l = getEntries().filter(f => f.d === dt.d && f.m === dt.m && (!type || f.type === type));
+         const d = dt.d + ' ' + cap(MONTHS[dt.m]);
+         return l.length ? 'On ' + d + ': ' + l.map(title).join(', ') + '.' : 'Nothing is saved for ' + d + '.';
+      }
 
-                           const type = detectType(n), dt = findDate(n), names = mentioned(core, n);
-                           const addVerb = R.add.test(core), left = leftover(core);
+      function deleteReply(n, type, names) {
+         const res = narrow(names, n, type);
+         if (!res.length) return "I couldn't find that. Say \"show me the list\" to see what is saved.";
+         if (res.length > 1) return 'Which one should I remove? ' + res.map(title).join(', ') + '. For example: Delete ' + title(res[0]) + '.';
+         removeEntry(res[0]);
+         return 'Removed ' + title(res[0]) + '.';
+      }
 
-                           if (!dt && !names.length && R.help.test(n)) return HELP;
-                           if (!dt && R.del.test(core)) return deleteReply(n, type, names);
+      function dictionaryReply(n, exact) {
+         const plain = n.replace(/[^\p{L}\p{N}\s]/gu, '').trim();
+         for (const k in DICTIONARY) {
+            const hit = exact ? plain === k.toLowerCase() : new RegExp('\\b' + esc(k.toLowerCase()) + '\\b').test(n);
+            if (hit) { const v = DICTIONARY[k]; return Array.isArray(v) ? v[Math.floor(Math.random() * v.length)] : v; }
+         }
+         return null;
+      }
 
-                           if (dt) {  /* a date in the sentence: save it, or answer "who has something on 14 March?" */
-                                    if (!addVerb && /\b(who|whose|which|anyone|anybody)\b/.test(n)) return onDateReply(dt, type);
-                                    const w = parseWho(dt.rest);
-                                    return w ? addEntry(w, dt) : 'What is this date for? Try: Add Riya birthday 14 March.';
-                           }
+      /* Recognize natural variations of the app's creator question. */
+      function creatorReply(n) {
+         const creatorQuestion = /\bwho\b.*\b(?:made|created|built|programmed|developed|designed)\b.*\b(?:you|yourself|this|it|dayminder|app|website)\b|\bwho\s+(?:is|was)\s+(?:your\s+)?(?:creator|developer|programmer|maker)\b|\bwho\s+are\s+you\s+(?:made|created|built|programmed)\s+by\b|\b(?:by whom|whom)\b.*\b(?:made|created|built|programmed|developed|designed)\b/;
+         if (!creatorQuestion.test(n)) return null;
+         const asksYear = /\b(?:when|what year|which year|in what year|in which year|what was the year|what is the year|year were you|year was this)\b/.test(n);
+         return asksYear ? 'I was programmed by Debangshu Sir in 2026.' : 'I was programmed by Debangshu Sir.';
+      }
 
-                           if (names.length) {  /* a saved person or "my / our" was mentioned */
-                                    const res = narrow(names, n, type);
-                                    return res.length ? res.map(whenReply).join('\n') : "I don't have " + poss(names[0]) + ' ' + type + ' saved yet. Try: Add ' + names[0].name + ' ' + type + ' 14 March.';
-                           }
+      function handle(text) {
+         const n = norm(text);
+         const core = n.replace(LEAD, ' ').replace(/\s+/g, ' ').trim();
+         const creator = creatorReply(n);
+         if (creator) return creator;
+         const ex = dictionaryReply(n, true);
+         if (ex) return ex;
 
-                           if (R.today.test(n)) return todayReply(type);
-                           if (R.upcoming.test(n)) return upcomingReply(n, type);
-                           if (!addVerb && (R.list.test(n) || (type && R.show.test(n) && !left))) return listReply(type);
-                           if (addVerb) return 'I need a date to save that. Try: Add Riya birthday 14 March.';
+         const type = detectType(n), dt = findDate(n), names = mentioned(core, n);
+         const addVerb = R.add.test(core), left = leftover(core);
 
-                           if (type && (R.when.test(n) || R.show.test(n)) && (left || /\b(my|our)\b/.test(n))) {
-                                    const who = left ? cap(left) + "'s" : /\bour\b/.test(n) ? 'our' : 'your';
-                                    return "I don't have " + who + ' ' + type + ' saved yet. Try: Add ' + (left ? cap(left) : /\bour\b/.test(n) ? 'our' : 'my') + ' ' + type + ' 14 March.';
-                           }
-                           if (R.show.test(n) && !left) return listReply(null);
+         if (!dt && !names.length && R.help.test(n)) return HELP;
+         if (!dt && R.del.test(core)) return deleteReply(n, type, names);
 
-                           return dictionaryReply(n, false) || FALLBACK;
-                  }
+         if (dt) {  /* a date in the sentence: save it, or answer "who has something on 14 March?" */
+            if (!addVerb && /\b(who|whose|which|anyone|anybody)\b/.test(n)) return onDateReply(dt, type);
+            const w = parseWho(dt.rest);
+            return w ? addEntry(w, dt) : 'What is this date for? Try: Add Riya birthday 14 March.';
+         }
 
-                  /* =====================================================
-                     4. CHAT UI
-                     ===================================================== */
-                  const $ = id => document.getElementById(id);
-                  const log = $('log'), input = $('text'), mic = $('mic'), voiceBtn = $('voiceToggle'), statusEl = $('status'), app = $('app');
-                  document.title = APP_NAME; $('appName').textContent = APP_NAME; $('tagline').textContent = TAGLINE;
+         if (names.length) {  /* a saved person or "my / our" was mentioned */
+            const res = narrow(names, n, type);
+            return res.length ? res.map(whenReply).join('\n') : "I don't have " + poss(names[0]) + ' ' + type + ' saved yet. Try: Add ' + names[0].name + ' ' + type + ' 14 March.';
+         }
 
-                  function addMsg(who, text, chips) {
-                           const el = document.createElement('div');
-                           el.className = 'msg ' + who;
-                           el.textContent = text;
-                           if (chips) {
-                                    const box = document.createElement('div');
-                                    box.className = 'chips';
-                                    chips.forEach(c => {
-                                             const b = document.createElement('button');
-                                             b.type = 'button'; b.className = 'chip'; b.textContent = c.label;
-                                             b.onclick = () => { addMsg('user', c.label); showBot(c.run()); };
-                                             box.appendChild(b);
-                                    });
-                                    el.appendChild(box);
-                           }
-                           log.appendChild(el);
-                           log.scrollTop = log.scrollHeight;
-                  }
+         if (R.today.test(n)) return todayReply(type);
+         if (R.upcoming.test(n)) return upcomingReply(n, type);
+         if (!addVerb && (R.list.test(n) || (type && R.show.test(n) && !left))) return listReply(type);
+         if (addVerb) return 'I need a date to save that. Try: Add Riya birthday 14 March.';
 
-                  function confetti() {
-                           if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                           const cols = ['#ff3d7f', '#ffc533', '#19b5a5', '#7c5cff'];
-                           for (let i = 0; i < 32; i++) {
-                                    const s = document.createElement('i');
-                                    s.className = 'confetti';
-                                    s.style.left = Math.random() * 100 + 'vw';
-                                    s.style.background = cols[i % 4];
-                                    s.style.setProperty('--x', (Math.random() * 160 - 80) + 'px');
-                                    s.style.animationDelay = Math.random() * .4 + 's';
-                                    document.body.appendChild(s);
-                                    setTimeout(() => s.remove(), 3200);
-                           }
-                  }
+         if (type && (R.when.test(n) || R.show.test(n)) && (left || /\b(my|our)\b/.test(n))) {
+            const who = left ? cap(left) + "'s" : /\bour\b/.test(n) ? 'our' : 'your';
+            return "I don't have " + who + ' ' + type + ' saved yet. Try: Add ' + (left ? cap(left) : /\bour\b/.test(n) ? 'our' : 'my') + ' ' + type + ' 14 March.';
+         }
+         if (R.show.test(n) && !left) return listReply(null);
 
-                  function showBot(r) {
-                           const out = typeof r === 'string' ? { text: r } : r;
-                           addMsg('bot', out.text, out.chips);
-                           speak(out.text);
-                           if (out.text.includes('🎉') || out.text.includes('Saved!')) confetti();
-                  }
+         return dictionaryReply(n, false) || FALLBACK;
+      }
 
-                  function send(text) {
-                           text = text.trim();
-                           if (!text) return;
-                           addMsg('user', text);
-                           showBot(handle(text));
-                  }
+      /* =====================================================
+         4. CHAT UI
+         ===================================================== */
+      const $ = id => document.getElementById(id);
+      const log = $('log'), input = $('text'), mic = $('mic'), voiceBtn = $('voiceToggle'), statusEl = $('status'), app = $('app');
+      document.title = APP_NAME; $('appName').textContent = APP_NAME; $('tagline').textContent = TAGLINE;
 
-                  $('chatForm').addEventListener('submit', e => { e.preventDefault(); send(input.value); input.value = ''; input.focus(); });
+      function addMsg(who, text, chips) {
+         const el = document.createElement('div');
+         el.className = 'msg ' + who;
+         el.textContent = text;
+         if (chips) {
+            const box = document.createElement('div');
+            box.className = 'chips';
+            chips.forEach(c => {
+               const b = document.createElement('button');
+               b.type = 'button'; b.className = 'chip'; b.textContent = c.label;
+               b.onclick = () => { addMsg('user', c.label); showBot(c.run()); };
+               box.appendChild(b);
+            });
+            el.appendChild(box);
+         }
+         log.appendChild(el);
+         log.scrollTop = log.scrollHeight;
+      }
 
-                  /* ---------- help panel ---------- */
-                  const setHelp = open => app.classList.toggle('help-open', open);
-                  $('helpBtn').onclick = () => setHelp(true);
-                  $('closeHelp').onclick = () => setHelp(false);
-                  $('backdrop').onclick = () => setHelp(false);
-                  document.addEventListener('keydown', e => { if (e.key === 'Escape') setHelp(false); });
-                  document.querySelectorAll('.cmd').forEach(b => b.addEventListener('click', () => {
-                           setHelp(false);
-                           if (b.dataset.mode === 'run') send(b.textContent);
-                           else { input.value = b.textContent; input.focus(); }
-                  }));
+      function confetti() {
+         if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+         const cols = ['#ff3d7f', '#ffc533', '#19b5a5', '#7c5cff'];
+         for (let i = 0; i < 32; i++) {
+            const s = document.createElement('i');
+            s.className = 'confetti';
+            s.style.left = Math.random() * 100 + 'vw';
+            s.style.background = cols[i % 4];
+            s.style.setProperty('--x', (Math.random() * 160 - 80) + 'px');
+            s.style.animationDelay = Math.random() * .4 + 's';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 3200);
+         }
+      }
 
-                  /* =====================================================
-                     5. VOICE
-                     ===================================================== */
-                  const canSpeak = 'speechSynthesis' in window;
-                  let voiceOn = canSpeak, voices = [], speakId = 0, rec = null;
+      function showBot(r) {
+         const out = typeof r === 'string' ? { text: r } : r;
+         addMsg('bot', out.text, out.chips);
+         speak(out.text);
+         if (out.text.includes('🎉') || out.text.includes('Saved!')) confetti();
+      }
 
-                  function setStatus(t) { statusEl.textContent = t; statusEl.hidden = !t; }
-                  statusEl.onclick = () => { speakId++; if (canSpeak) speechSynthesis.cancel(); if (rec && mic.classList.contains('on')) rec.stop(); setStatus(''); };
+      function send(text) {
+         text = text.trim();
+         if (!text) return;
+         addMsg('user', text);
+         showBot(handle(text));
+      }
 
-                  if (canSpeak) {
-                           const load = () => { voices = speechSynthesis.getVoices(); };
-                           load(); speechSynthesis.onvoiceschanged = load;
-                           /* phones only allow speech after a tap, so unlock it on the first touch */
-                           document.addEventListener('pointerdown', () => {
-                                    const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u);
-                           }, { once: true });
-                  } else {
-                           voiceBtn.textContent = 'Voice: n/a'; voiceBtn.disabled = true;
-                  }
+      function downloadBackup() {
+         const backup = {
+            format: 'dayminder-backup',
+            version: 1,
+            exportedAt: new Date().toISOString(),
+            entries: getEntries().map(f => ({ name: f.name, type: f.type, day: f.d, month: f.m + 1, year: f.y || null }))
+         };
+         const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+         const url = URL.createObjectURL(blob);
+         const link = document.createElement('a');
+         link.href = url;
+         link.download = 'dayminder-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+         document.body.appendChild(link);
+         link.click();
+         link.remove();
+         setTimeout(() => URL.revokeObjectURL(url), 1000);
+         showBot('Your backup is ready. It includes all birthdays, anniversaries, and other saved dates. Keep the JSON file somewhere safe.');
+      }
 
-                  function pickVoice() {
-                           const l = LANG.toLowerCase();
-                           return voices.find(v => v.lang.toLowerCase().replace('_', '-') === l) || voices.find(v => v.lang.toLowerCase().startsWith(l.slice(0, 2))) || null;
-                  }
+      async function restoreBackup(file) {
+         try {
+            const backup = JSON.parse(await file.text());
+            if (backup.format !== 'dayminder-backup' || !Array.isArray(backup.entries)) throw new Error('This is not a Dayminder backup file.');
+            const entries = backup.entries.map(x => {
+               const name = typeof x.name === 'string' ? x.name.trim().slice(0, 80) : '';
+               const type = typeof x.type === 'string' ? x.type.trim().toLowerCase().slice(0, 60) : '';
+               const d = Number(x.day), m = Number(x.month) - 1;
+               const y = x.year == null ? null : Number(x.year);
+               if (!name || !type || !validDM(d, m) || (y !== null && (!Number.isInteger(y) || y < 1900 || y > new Date().getFullYear()))) return null;
+               return { name, type, d, m, y };
+            }).filter(Boolean);
+            if (!entries.length) throw new Error('No valid saved dates were found in that backup.');
+            if (!window.confirm('Restore ' + entries.length + ' dates? This will merge them with dates already saved here and update matching names and date types. Other current dates will stay.')) return;
+            let added = 0, updated = 0;
+            entries.forEach(f => {
+               const k = keyOf(f);
+               if (getEntries().some(x => keyOf(x) === k)) updated++; else added++;
+               store.custom = store.custom.filter(x => keyOf(x) !== k);
+               store.custom.push(f);
+               store.removed = store.removed.filter(x => x !== k);
+            });
+            persist();
+            updateBirthdayBanner();
+            showBot('Backup restored: ' + added + ' added and ' + updated + ' matching ' + (updated === 1 ? 'date updated' : 'dates updated') + '. Your other saved dates were kept.');
+         } catch (err) {
+            showBot(err && err.message ? err.message : 'I could not read that backup file. Please choose a Dayminder JSON backup.');
+         }
+      }
 
-                  function speak(text) {
-                           if (!voiceOn || !canSpeak) return;
-                           const clean = text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').replace(/\s*\n\s*/g, '. ');
-                           const parts = (clean.match(/[^.!?]+[.!?]*/g) || []).map(p => p.trim()).filter(Boolean);
-                           if (!parts.length) return;
-                           const id = ++speakId, v = pickVoice();
-                           let left = parts.length;
-                           speechSynthesis.cancel();
-                           parts.forEach((p, i) => {  /* short pieces avoid the browser cutting off long speech */
-                                    const u = new SpeechSynthesisUtterance(p);
-                                    u.lang = LANG; u.rate = 0.95;
-                                    if (v) u.voice = v;
-                                    if (i === 0) u.onstart = () => { if (id === speakId) setStatus('Speaking... tap to stop'); };
-                                    u.onend = u.onerror = () => { if (id === speakId && --left <= 0) setStatus(''); };
-                                    speechSynthesis.speak(u);
-                           });
-                  }
+      $('chatForm').addEventListener('submit', e => { e.preventDefault(); send(input.value); input.value = ''; input.focus(); });
 
-                  voiceBtn.addEventListener('click', () => {
-                           voiceOn = !voiceOn;
-                           voiceBtn.textContent = 'Voice: ' + (voiceOn ? 'on' : 'off');
-                           voiceBtn.setAttribute('aria-pressed', voiceOn);
-                           if (voiceOn) speak('Voice is on.');
-                           else { speakId++; speechSynthesis.cancel(); setStatus(''); }
-                  });
+      /* ---------- help panel ---------- */
+      const setHelp = open => app.classList.toggle('help-open', open);
+      $('helpBtn').onclick = () => setHelp(true);
+      $('closeHelp').onclick = () => setHelp(false);
+      $('backdrop').onclick = () => setHelp(false);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setHelp(false); });
+      $('backupBtn').addEventListener('click', downloadBackup);
+      $('restoreFile').addEventListener('change', e => {
+         const file = e.target.files && e.target.files[0];
+         e.target.value = '';
+         if (file) restoreBackup(file);
+      });
+      document.querySelectorAll('.cmd').forEach(b => b.addEventListener('click', () => {
+         if (b.id === 'restoreBtn') { setHelp(false); $('restoreFile').click(); return; }
+         setHelp(false);
+         if (b.dataset.mode === 'run') send(b.textContent);
+         else { input.value = b.textContent; input.focus(); }
+      }));
 
-                  /* speech input (Chrome, Edge, Safari; needs https or localhost) */
-                  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-                  if (!SR) {
-                           mic.hidden = true;
-                  } else {
-                           rec = new SR();
-                           rec.lang = LANG; rec.interimResults = false;
-                           rec.onresult = e => send(e.results[0][0].transcript);
-                           rec.onend = () => { mic.classList.remove('on'); if (statusEl.textContent.startsWith('Listening')) setStatus(''); };
-                           rec.onerror = e => addMsg('bot', e.error === 'not-allowed'
-                                    ? 'Microphone access is blocked. Allow it in your browser settings.'
-                                    : "I couldn't hear that. Tap the mic and try again.");
-                           mic.addEventListener('click', () => {
-                                    if (mic.classList.contains('on')) { rec.stop(); return; }
-                                    speakId++; if (canSpeak) speechSynthesis.cancel();
-                                    try { rec.start(); mic.classList.add('on'); setStatus('Listening... tap to stop'); } catch (e) { }
-                           });
-                  }
+      /* =====================================================
+         5. VOICE
+         ===================================================== */
+      const canSpeak = 'speechSynthesis' in window;
+      let voiceOn = canSpeak, voices = [], speakId = 0, rec = null;
 
-                  /* greeting */
-                  (function () {
-                           let msg = "Hi! I'm " + APP_NAME + " 🎉 Tell me any date worth remembering, like \"Add Riya birthday 14 March\" or \"Save our anniversary 5 June\", and ask in your own words. Open Help for examples.";
-                           const t = getEntries().filter(f => daysUntil(f).days === 0);
-                           if (t.length) msg += "\n\nToday: " + t.map(title).join(', ') + '. 🎉';
-                           addMsg('bot', msg);
-                  })();
-         </script>
-         <footer>
-            <p>&copy; Made by Debangshu-2026. All rights reserved.</p>
-         </footer>
+      function setStatus(t) { statusEl.textContent = t; statusEl.hidden = !t; }
+      statusEl.onclick = () => { speakId++; if (canSpeak) speechSynthesis.cancel(); if (rec && mic.classList.contains('on')) rec.stop(); setStatus(''); };
+
+      if (canSpeak) {
+         const load = () => { voices = speechSynthesis.getVoices(); };
+         load(); speechSynthesis.onvoiceschanged = load;
+         /* phones only allow speech after a tap, so unlock it on the first touch */
+         document.addEventListener('pointerdown', () => {
+            const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u);
+         }, { once: true });
+      } else {
+         voiceBtn.textContent = 'Voice: n/a'; voiceBtn.disabled = true;
+      }
+
+      function pickVoice() {
+         const l = LANG.toLowerCase();
+         return voices.find(v => v.lang.toLowerCase().replace('_', '-') === l) || voices.find(v => v.lang.toLowerCase().startsWith(l.slice(0, 2))) || null;
+      }
+
+      function speak(text) {
+         if (!voiceOn || !canSpeak) return;
+         const clean = text.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, '').replace(/\s*\n\s*/g, '. ');
+         const parts = (clean.match(/[^.!?]+[.!?]*/g) || []).map(p => p.trim()).filter(Boolean);
+         if (!parts.length) return;
+         const id = ++speakId, v = pickVoice();
+         let left = parts.length;
+         speechSynthesis.cancel();
+         parts.forEach((p, i) => {  /* short pieces avoid the browser cutting off long speech */
+            const u = new SpeechSynthesisUtterance(p);
+            u.lang = LANG; u.rate = 0.95;
+            if (v) u.voice = v;
+            if (i === 0) u.onstart = () => { if (id === speakId) setStatus('Speaking... tap to stop'); };
+            u.onend = u.onerror = () => { if (id === speakId && --left <= 0) setStatus(''); };
+            speechSynthesis.speak(u);
+         });
+      }
+
+      voiceBtn.addEventListener('click', () => {
+         voiceOn = !voiceOn;
+         voiceBtn.textContent = 'Voice: ' + (voiceOn ? 'on' : 'off');
+         voiceBtn.setAttribute('aria-pressed', voiceOn);
+         if (voiceOn) speak('Voice is on.');
+         else { speakId++; speechSynthesis.cancel(); setStatus(''); }
+      });
+
+      /* speech input (Chrome, Edge, Safari; needs https or localhost) */
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) {
+         mic.hidden = true;
+      } else {
+         rec = new SR();
+         rec.lang = LANG; rec.interimResults = false;
+         rec.onresult = e => send(e.results[0][0].transcript);
+         rec.onend = () => { mic.classList.remove('on'); if (statusEl.textContent.startsWith('Listening')) setStatus(''); };
+         rec.onerror = e => addMsg('bot', e.error === 'not-allowed'
+            ? 'Microphone access is blocked. Allow it in your browser settings.'
+            : "I couldn't hear that. Tap the mic and try again.");
+         mic.addEventListener('click', () => {
+            if (mic.classList.contains('on')) { rec.stop(); return; }
+            speakId++; if (canSpeak) speechSynthesis.cancel();
+            try { rec.start(); mic.classList.add('on'); setStatus('Listening... tap to stop'); } catch (e) { }
+         });
+      }
+
+      /* Short, changing opening greeting; speak when browser voice playback is available. */
+      (function () {
+         const greetings = [
+            'Hi there! Ready to celebrate someone special?',
+            'Welcome back! Let’s keep the happy dates close.',
+            'Hello! Who deserves a birthday reminder today?',
+            'So glad you’re here. What date should we remember?',
+            'Hey! Your little corner for big celebrations is ready.',
+            'Welcome! Let’s make sure no special day slips by.',
+            'Hi! A little planning makes every birthday brighter.',
+            'Hello again! What happy date can I help you track?',
+            'Good to see you! Let’s make the next celebration count.',
+            'Hey there! I’m ready when you are.'
+         ];
+         let previous = -1;
+         try { previous = Number(localStorage.getItem('dm_greeting_last_v1')); } catch (e) { }
+         const choices = greetings.map((_, i) => i).filter(i => i !== previous);
+         const pick = choices[Math.floor(Math.random() * choices.length)];
+         try { localStorage.setItem('dm_greeting_last_v1', String(pick)); } catch (e) { }
+         const msg = greetings[pick];
+         addMsg('bot', msg);
+         updateBirthdayBanner();
+         speak(msg);
+      })();
+   </script>
+   <footer>
+      <p>&copy; Made by Debangshu-2026. All rights reserved.</p>
+   </footer>
 </body>
 
 </html>
